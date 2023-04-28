@@ -1,0 +1,25 @@
+{
+  "breakdownType": "region",
+  "breakdown": [
+    {
+      "percentage": "81.0",
+      "key": "Mornington"
+    },
+    {
+      "percentage": "10.0",
+      "key": "Yarra Valley"
+    },
+    {
+      "percentage": "5.0",
+      "key": "Heathcote"
+    },
+    {
+      "percentage": "2.0",
+      "key": "Macedon"
+    },
+    {
+      "percentage": "2.0",
+      "key": "Port Phillip"
+    }
+  ]
+}

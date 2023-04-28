@@ -1,0 +1,33 @@
+{
+  "breakdownType": "year-variety",
+  "breakdown": [
+    {
+      "percentage": "72.0",
+      "key": "2015-Pinot Noir"
+    },
+    {
+      "percentage": "15.0",
+      "key": "2014-Pinot Noir"
+    },
+    {
+      "percentage": "5.0",
+      "key": "2013-Cabernet"
+    },
+    {
+      "percentage": "3.0",
+      "key": "2015-Merlot"
+    },
+    {
+      "percentage": "2.0",
+      "key": "2014-Malbec"
+    },
+    {
+      "percentage": "2.0",
+      "key": "2015-Zinfandel"
+    },
+    {
+      "percentage": "1.0",
+      "key": "2015-Shiraz"
+    }
+  ]
+}
