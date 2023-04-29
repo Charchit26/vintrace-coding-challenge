@@ -127,22 +127,34 @@ public class BreakdownController {
     }
 
     public BreakdownResponse buildVarietyBreakdown(Stream<WineDto.ComponentDto> cds) {
-        List<BreakdownResponse.Breakdown> b = cds
-                .map(o -> new BreakdownResponse.Breakdown(String.valueOf(o.percentage), o.variety))
+        Map<String, Double> totalPercentageByVariety = cds
+                .collect(Collectors.groupingBy(component -> component.variety,
+                        Collectors.summingDouble(component -> component.percentage)));
+
+        List<BreakdownResponse.Breakdown> b = totalPercentageByVariety.entrySet().stream()
+                .map(o -> new BreakdownResponse.Breakdown(String.valueOf(o.getValue()), o.getKey()))
                 .collect(Collectors.toList());
         return new BreakdownResponse("variety", b);
     }
 
     public BreakdownResponse buildRegionBreakdown(Stream<WineDto.ComponentDto> cds) {
-        List<BreakdownResponse.Breakdown> b = cds
-                .map(o -> new BreakdownResponse.Breakdown(String.valueOf(o.percentage), o.region))
+        Map<String, Double> totalPercentageByRegion = cds
+                .collect(Collectors.groupingBy(component -> component.region,
+                        Collectors.summingDouble(component -> component.percentage)));
+
+        List<BreakdownResponse.Breakdown> b = totalPercentageByRegion.entrySet().stream()
+                .map(o -> new BreakdownResponse.Breakdown(String.valueOf(o.getValue()), o.getKey()))
                 .collect(Collectors.toList());
         return new BreakdownResponse("region", b);
     }
 
     public BreakdownResponse buildYearVarietyBreakdown(Stream<WineDto.ComponentDto> cds) {
-        List<BreakdownResponse.Breakdown> b = cds
-                .map(o -> new BreakdownResponse.Breakdown(String.valueOf(o.percentage), String.format("%d-%s", o.year, o.variety)))
+        Map<String, Double> totalPercentageByYearVariety = cds
+                .collect(Collectors.groupingBy(component -> String.format("%d-%s", component.year, component.variety),
+                        Collectors.summingDouble(component -> component.percentage)));
+
+        List<BreakdownResponse.Breakdown> b = totalPercentageByYearVariety.entrySet().stream()
+                .map(o -> new BreakdownResponse.Breakdown(String.valueOf(o.getValue()), o.getKey()))
                 .collect(Collectors.toList());
         return new BreakdownResponse("year-variety", b);
     }

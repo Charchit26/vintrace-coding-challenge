@@ -1,6 +1,7 @@
 ## Bug Fixes
 
 - Fix `testGetBreakdownByYear` test case 
+- Fix all tests in `BreakdownControllerTest`
 
 ## Code refactors
 
