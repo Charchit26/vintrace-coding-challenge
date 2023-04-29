@@ -1,7 +1,11 @@
 ## Bug Fixes
 
-- Fix `testGetBreakdownByYear` test case 
 - Fix all tests in `BreakdownControllerTest`
+  - The map used in the controller does not group the items based on the category as required. 
+  - So, we need to first group the ComponentDTO items based on the categories. 
+  - Then we use the map obtained to stream on the entry set and map each group into the breakdown response object using
+  the key and value of the map. This returns us the list of the breakdown response as required.
+
 
 ## Code refactors
 
