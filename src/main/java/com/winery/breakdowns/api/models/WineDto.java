@@ -1,4 +1,4 @@
-package com.winery.breakdowns.api.dto;
+package com.winery.breakdowns.api.models;
 
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
@@ -12,7 +12,11 @@ public class WineDto {
     public String tankCode;
     public String productState;
     public String ownerName;
-    public List<ComponentDto> components;
+    private final List<Component> components;
+
+    public List<Component> getComponents() {
+        return components;
+    }
 
     @JsonCreator(mode = JsonCreator.Mode.PROPERTIES)
     public WineDto(
@@ -22,7 +26,7 @@ public class WineDto {
             @JsonProperty("tankCode") String tc,
             @JsonProperty("productState") String ps,
             @JsonProperty("ownerName") String on,
-            @JsonProperty("components") List<ComponentDto> c
+            @JsonProperty("components") List<Component> c
     ) {
         this.lotCode = lc;
         this.volume = v;
@@ -31,25 +35,5 @@ public class WineDto {
         this.productState = ps;
         this.ownerName = on;
         this.components = c;
-    }
-
-    public static class ComponentDto {
-        public double percentage;
-        public int year;
-        public String variety;
-        public String region;
-
-        @JsonCreator(mode = JsonCreator.Mode.PROPERTIES)
-        public ComponentDto(
-                @JsonProperty("percentage") double p,
-                @JsonProperty("year") int y,
-                @JsonProperty("variety") String v,
-                @JsonProperty("region") String r
-        ) {
-            this.percentage = p;
-            this.year = y;
-            this.variety = v;
-            this.region = r;
-        }
     }
 }

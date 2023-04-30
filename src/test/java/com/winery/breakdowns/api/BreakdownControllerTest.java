@@ -1,9 +1,13 @@
 package com.winery.breakdowns.api;
 
+import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.TestInstance;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
+import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.web.servlet.MockMvc;
+import org.springframework.test.web.servlet.setup.MockMvcBuilders;
+import org.springframework.web.context.WebApplicationContext;
 
 import java.io.IOException;
 import java.net.URL;
@@ -18,11 +22,17 @@ import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
-@WebMvcTest(BreakdownController.class)
+@SpringBootTest
+@TestInstance(TestInstance.Lifecycle.PER_CLASS)
 class BreakdownControllerTest {
 
     @Autowired
-    MockMvc mockMvc;
+    private WebApplicationContext wac;
+    private MockMvc mockMvc;
+    @BeforeAll
+    public void setup() {
+        this.mockMvc = MockMvcBuilders.webAppContextSetup(this.wac).build();
+    }
 
     @Test
     void testGetBreakdownByYear_validLotCode_expect200WithData() throws Exception {
@@ -62,6 +72,14 @@ class BreakdownControllerTest {
                 .andDo(print())
                 .andExpect(status().isOk())
                 .andExpect(content().json(expectedResponse));
+    }
+
+    @Test
+    void testGetBreakdownByYear_inValidLotCode_expect404() throws Exception {
+
+        this.mockMvc.perform(get("/api/breakdown/year/INVALID-VK"))
+                .andDo(print())
+                .andExpect(status().isNotFound());
     }
 
     String readSampleFile(String filePath) throws IOException {
