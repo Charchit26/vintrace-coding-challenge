@@ -3,6 +3,7 @@ package com.winery.breakdowns.api.services;
 import com.winery.breakdowns.api.models.Breakdown;
 import com.winery.breakdowns.api.models.BreakdownResponse;
 import com.winery.breakdowns.api.models.Component;
+import com.winery.breakdowns.api.models.ComponentKeys;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -13,19 +14,19 @@ import java.util.stream.Stream;
 @Service
 public class BreakdownService {
 
-    public BreakdownResponse build(String t, Stream<Component> cds) {
-        switch (t) {
-            case "year":
+    public BreakdownResponse build(ComponentKeys key, Stream<Component> cds) {
+        switch (key) {
+            case YEAR:
                 return buildYearBreakdown(cds);
-            case "region":
+            case REGION:
                 return buildRegionBreakdown(cds);
-            case "variety":
+            case VARIETY:
                 return buildVarietyBreakdown(cds);
-            case "year-variety":
+            case YEAR_VARIETY:
                 return buildYearVarietyBreakdown(cds);
         }
 
-        throw new IllegalArgumentException("Received invalid type: " + t);
+        throw new IllegalArgumentException("Received invalid type: " + key);
     }
 
     private BreakdownResponse buildYearBreakdown(Stream<Component> cds) {

@@ -2,21 +2,19 @@ package com.winery.breakdowns.api.models;
 
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
+import lombok.Data;
 
 import java.util.List;
 
+@Data
 public class WineDto {
-    public String lotCode;
-    public double volume;
-    public String description;
-    public String tankCode;
-    public String productState;
-    public String ownerName;
+    private String lotCode;
+    private double volume;
+    private String description;
+    private String tankCode;
+    private String productState;
+    private String ownerName;
     private final List<Component> components;
-
-    public List<Component> getComponents() {
-        return components;
-    }
 
     @JsonCreator(mode = JsonCreator.Mode.PROPERTIES)
     public WineDto(

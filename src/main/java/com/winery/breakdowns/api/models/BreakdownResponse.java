@@ -1,13 +1,13 @@
 package com.winery.breakdowns.api.models;
 
+import lombok.AllArgsConstructor;
+import lombok.Data;
+
 import java.util.List;
 
+@Data
+@AllArgsConstructor
 public class BreakdownResponse {
-    public String breakdownType;
-    public List<Breakdown> breakdown;
-
-    public BreakdownResponse(String bt, List<Breakdown> b) {
-        this.breakdownType = bt;
-        this.breakdown = b;
-    }
+    private String breakdownType;
+    private List<Breakdown> breakdown;
 }

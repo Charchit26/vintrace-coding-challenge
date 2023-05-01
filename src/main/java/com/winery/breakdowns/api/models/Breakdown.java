@@ -1,11 +1,11 @@
 package com.winery.breakdowns.api.models;
 
-public class Breakdown {
-    public String percentage;
-    public String key;
+import lombok.AllArgsConstructor;
+import lombok.Data;
 
-    public Breakdown(String p, String k) {
-        this.percentage = p;
-        this.key = k;
-    }
+@AllArgsConstructor
+@Data
+public class Breakdown {
+    private String percentage;
+    private String key;
 }
